@@ -1,25 +1,24 @@
-import express from 'express'
-import cors from 'cors'
+import express from "express";
+import cors from "cors";
 
-import { conectar } from 'config/db.js'
- 
-import { authRoutes } from './routes/auth.route.js'
-import { pacienteRoutes } from './routes/paciente.route.js'
+import { conectarDB } from "./config/db.js";
 
-const app = express()
+import { authRoutes } from "./routes/auth.routes.js";
+import { pacienteRoutes } from "./routes/paciente.route.js";
 
+const app = express();
 
-app.use(cors())
-app.use(express.json())
+app.use(cors());
+app.use(express.json());
 
-app.use('/auth', authRoutes)
+app.use("/auth", authRoutes);
 //http://localhost:3001/auth/registrar/
 //http://localhost:3001/auth/login/
 
-app.use('/pacientes', pacienteRoutes)
+app.use("/pacientes", pacienteRoutes);
 
-await conectar()
+await conectarDB();
 
-app.listen(3001, ()=>{
-    console.log('levantmos al apu')
-})
+app.listen(3001, () => {
+  console.log("levantmos al API");
+});
